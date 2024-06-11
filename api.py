@@ -17,16 +17,23 @@ ser = serial.Serial(arduino_port, baud_rate)
 @app.route("/display", methods=["GET"])
 @cross_origin(origin="*", headers=["Content-Type", "Authorization"])
 def display():
-    username = request.args.get("username")
-    task = request.args.get("task")
+    # username = request.args.get("username")
+    # task = request.args.get("task")
 
-    if username and task:
-        data = f"display;{username};{task}\n"
-        ser.write(data.encode())
+    data = f"display;{"Good Afternoon"}\n"
+    ser.write(data.encode())
+    return "Displayed on LCD", 200
 
-        return "Displayed on LCD", 200
-    else:
-        return "Missing parameters", 400
+@app.route("/clear", methods=["GET"])
+@cross_origin(origin="*", headers=["Content-Type", "Authorization"])
+def clear():
+    # username = request.args.get("username")
+    # task = request.args.get("task")
+
+    data = "clear;\n"
+    ser.write(data.encode())
+    return "Cleared", 200
+
 
 
 @app.route("/rotate_servo", methods=["GET"])

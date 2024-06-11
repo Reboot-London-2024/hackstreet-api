@@ -46,6 +46,8 @@ while True:
     except KeyboardInterrupt:
         print("Exiting program")
         break
+    except Exception as e:
+        print(e)
 
 # Close serial connection
 ser.close()
